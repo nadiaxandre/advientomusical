@@ -147,7 +147,7 @@
         function openGift(day, giftBox) {
             if (day === currentDay) {
                 giftBox.classList.add('open-gift');
-                photo.innerHTML = `<img src="${media[day - 1]}" alt="Imagen del día ${day}" style="width:560px; height:315px;">`;
+                photo.innerHTML = `<img src="${media[day - 1]}" alt="Imagen del día ${day}" style="width:315px; height:315px;">`;
                 message.textContent = '¡Feliz día del calendario de adviento! 🎶';
             } else {
                 message.textContent = 'Aún no es el día... ❄️';

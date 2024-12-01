@@ -145,7 +145,7 @@
 
         function openGift(day, giftBox) {
             if (day === currentDay) {
-                giftBox.classList.add('open-gift');
+                giftBox.classList.add('opened-gift');
                 video.innerHTML = `<iframe width="560" height="315" src="${videos[day - 1]}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
                 message.textContent = '¡Feliz día del calendario de adviento! 🎶';
             } else {

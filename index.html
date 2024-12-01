@@ -85,9 +85,32 @@
         const message = document.getElementById('message');
         const video = document.getElementById('video');
 
-	const media = [
-            'Disseny sense títol (2).png',
-	];
+        const media = [
+            'images/DissenySenseTitol2.png',
+            'https://www.youtube.com/watch?v=E8gmARGvPlI',
+            'https://www.youtube.com/watch?v=gset79KMmt0', 
+            'https://www.youtube.com/watch?v=nlR0MkrRklg',
+            'https://www.youtube.com/watch?v=LUjn3RpkcKY',
+            'https://www.youtube.com/watch?v=0bhsXykXxfg',
+            'https://www.youtube.com/watch?v=TFsZy9t-qDc',
+            'https://www.youtube.com/watch?v=Mk6ZzzWWJ1A',
+            'https://www.youtube.com/watch?v=c6eFFaoG8AU',
+            'https://www.youtube.com/watch?v=cbZTfrhcamA',
+            'https://www.youtube.com/watch?v=cbgCFy8YR7E',
+            'https://www.youtube.com/watch?v=s97bqNhuthM',
+            'https://www.youtube.com/watch?v=6fDFYHgbpAw',
+            'https://www.youtube.com/watch?v=AoNva6raHhE',
+            'https://www.youtube.com/watch?v=KTPGNQcc03I',
+            'https://www.youtube.com/watch?v=flA5ndOyZbI',
+            'https://www.youtube.com/watch?v=DkXIJe8CaIc',
+            'https://www.youtube.com/watch?v=Dkq3LD-4pmM',
+            'https://www.youtube.com/watch?v=LRP8d7hhpoQ',
+            'https://www.youtube.com/watch?v=bx6kO3EtmK0',
+            'https://www.youtube.com/watch?v=eFWUnHJWwCg',
+            'https://www.youtube.com/watch?v=WSUFzC6_fp8',
+            'https://www.youtube.com/watch?v=l3l83C-we-k',
+            'https://www.youtube.com/watch?v=0UVUW11FENs' // URL del video del día 24
+        ];
 
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -122,8 +145,13 @@
 
         function openGift(day, giftBox) {
             if (day === currentDay) {
-                giftBox.classList.add('opened-gift');
-                video.innerHTML = `<iframe width="560" height="315" src="${videos[day - 1]}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                giftBox.classList.add('open-gift');
+                const mediaType = media[day - 1].includes('youtube') ? 'video' : 'image';
+                if (mediaType === 'video') {
+                    video.innerHTML = `<iframe width="560" height="315" src="${media[day - 1]}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                } else {
+                    video.innerHTML = `<img src="${media[day - 1]}" alt="Imagen del día ${day}" style="width:560px; height:315px;">`;
+                }
                 message.textContent = '¡Feliz día del calendario de adviento! 🎶';
             } else {
                 message.textContent = 'Aún no es el día... ❄️';
@@ -132,3 +160,4 @@
     </script>
 </body>
 </html>
+

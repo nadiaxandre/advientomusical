@@ -72,10 +72,11 @@
             0% { transform: translateY(0); }
             100% { transform: translateY(100vh); }
         }
-        img { 
-            width: 315px; 
-            height: 315px; 
-            object-fit: contain; 
+
+        img {
+            width: 315px;
+            height: 315px;
+            object-fit: contain;
         }
     </style>
 </head>
@@ -91,7 +92,7 @@
         const photo = document.getElementById('photo');
 
         const media = [
-            'Disseny sense títol (2).png',
+            'images/DissenySenseTitol2.png',
             'images/image1.png',
             'images/image2.png',
             'images/image3.png',
@@ -152,7 +153,7 @@
         function openGift(day, giftBox) {
             if (day === currentDay) {
                 giftBox.classList.add('open-gift');
-                photo.innerHTML = `<img src="${media[day - 1]}" alt="Imagen del día ${day}" style="width:315px; height:315px;">`;
+                photo.innerHTML = `<img src="${media[day - 1]}" alt="Imagen del día ${day}">`;
                 message.textContent = '¡Feliz día del calendario de adviento! 🎶';
             } else {
                 message.textContent = 'Aún no es el día... ❄️';

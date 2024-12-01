@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de Adviento</title>
+    <style>
+        body {
+            background-color: #ff0000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            color: white;
+        }
+
+        #calendar {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr); /* 6 columnas */
+            gap: 10px; /* Espacio entre casillas */
+            width: 80%;
+            height: 80%;
+        }
+
+        .gift-box {
+            width: 100%;
+            height: 100%;
+            background: url('gift.png') no-repeat center center;
+            background-size: contain;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .open-gift {
+            background: url('open_gift.png') no-repeat center center !important;
+            background-size: contain !important;
+        }
+
+        .snow {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        #message {
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: white;
+            font-size: 1em;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+    </style>
+</head>
+<body>
+    <div id="calendar"></div>
+    <div id="message"></div>
+    <div id="video"></div>
+    <script>
+        const days = 24;
+        const currentDay = new Date().getDate();
+        const calendar = document.getElementById('calendar');
+        const message = document.getElementById('message');
+        const video = document.getElementById('video');
+
+	const videos = [
+            'https://www.youtube.com/watch?v=aAkMkVFwAoo',
+            'https://www.youtube.com/watch?v=E8gmARGvPlI',
+            'https://www.youtube.com/watch?v=gset79KMmt0', 
+            'https://www.youtube.com/watch?v=nlR0MkrRklg',
+	    'https://www.youtube.com/watch?v=LUjn3RpkcKY',
+	    'https://www.youtube.com/watch?v=0bhsXykXxfg',
+	    'https://www.youtube.com/watch?v=TFsZy9t-qDc',
+	    'https://www.youtube.com/watch?v=Mk6ZzzWWJ1A',
+	    'https://www.youtube.com/watch?v=c6eFFaoG8AU',
+	    'https://www.youtube.com/watch?v=cbZTfrhcamA',
+	    'https://www.youtube.com/watch?v=cbgCFy8YR7E',
+	    'https://www.youtube.com/watch?v=s97bqNhuthM',
+	    'https://www.youtube.com/watch?v=6fDFYHgbpAw',
+	    'https://www.youtube.com/watch?v=AoNva6raHhE',
+	    'https://www.youtube.com/watch?v=KTPGNQcc03I',
+	    'https://www.youtube.com/watch?v=flA5ndOyZbI',
+	    'https://www.youtube.com/watch?v=DkXIJe8CaIc',
+	    'https://www.youtube.com/watch?v=Dkq3LD-4pmM',
+	    'https://www.youtube.com/watch?v=LRP8d7hhpoQ',
+	    'https://www.youtube.com/watch?v=bx6kO3EtmK0',
+	    'https://www.youtube.com/watch?v=eFWUnHJWwCg',
+	    'https://www.youtube.com/watch?v=WSUFzC6_fp8',
+	    'https://www.youtube.com/watch?v=l3l83C-we-k',
+            'https://www.youtube.com/watch?v=0UVUW11FENs' // URL del video del día 24
+        ];
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function createGiftBoxes() {
+            const shuffledDays = shuffleArray([...Array(days).keys()].map(x => x + 1));
+            for (let i = 0; i < days; i++) {
+                const giftBox = document.createElement('div');
+                giftBox.className = 'gift-box';
+                giftBox.textContent = shuffledDays[i];
+                giftBox.onclick = () => openGift(shuffledDays[i], giftBox);
+                calendar.appendChild(giftBox);
+            }
+        }
+
+        createGiftBoxes();
+
+        // Crear copos de nieve
+        for (let i = 0; i < 100; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.style.left = `${Math.random() * 100}%`;
+            snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            snowflake.textContent = '❄️';
+            document.body.appendChild(snowflake);
+        }
+
+        function openGift(day, giftBox) {
+            if (day === currentDay) {
+                giftBox.classList.add('open-gift');
+                video.innerHTML = `<iframe width="560" height="315" src="${videos[day - 1]}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                message.textContent = '¡Feliz día del calendario de adviento! 🎶';
+            } else {
+                message.textContent = 'Aún no es el día... ❄️';
+            }
+        }
+    </script>
+</body>
+</html>
